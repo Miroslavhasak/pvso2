@@ -12,15 +12,15 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, 900)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 900)
 
 # Inicializácia OpenCV okna
-cv2.namedWindow("Detekcia kružníc", cv2.WINDOW_NORMAL)
+cv2.namedWindow("Detekcia kruznic", cv2.WINDOW_NORMAL)
 
 # Trackbary na úpravu parametrov
-cv2.createTrackbar('Param1', 'Detekcia kružníc', 115, 200, lambda x: None)
-cv2.createTrackbar('Param2', 'Detekcia kružníc', 58, 100, lambda x: None)
-cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 0, 100, lambda x: None)
-cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 300, 300, lambda x: None)
-cv2.createTrackbar('Canny1', 'Detekcia kružníc', 0, 255, lambda x: None)
-cv2.createTrackbar('Canny2', 'Detekcia kružníc', 50, 255, lambda x: None)
+cv2.createTrackbar('Param1', 'Detekcia kruznic', 115, 200, lambda x: None)
+cv2.createTrackbar('Param2', 'Detekcia kruznic', 58, 100, lambda x: None)
+cv2.createTrackbar('MinRadius', 'Detekcia kruznic', 0, 100, lambda x: None)
+cv2.createTrackbar('MaxRadius', 'Detekcia kruznic', 300, 300, lambda x: None)
+cv2.createTrackbar('Canny1', 'Detekcia kruznic', 0, 255, lambda x: None)
+cv2.createTrackbar('Canny2', 'Detekcia kruznic', 50, 255, lambda x: None)
 
 while True:
     ret, frame = cap.read()
@@ -33,12 +33,12 @@ while True:
     gray = cv2.GaussianBlur(gray, (11, 11), 2)  # Silnejšie rozmazanie
     
     # Načítanie hodnôt z trackbarov
-    param1 = cv2.getTrackbarPos('Param1', 'Detekcia kružníc')
-    param2 = cv2.getTrackbarPos('Param2', 'Detekcia kružníc')
-    minRadius = cv2.getTrackbarPos('MinRadius', 'Detekcia kružníc')
-    maxRadius = cv2.getTrackbarPos('MaxRadius', 'Detekcia kružníc')
-    canny1 = cv2.getTrackbarPos('Canny1', 'Detekcia kružníc')
-    canny2 = cv2.getTrackbarPos('Canny2', 'Detekcia kružníc')
+    param1 = cv2.getTrackbarPos('Param1', 'Detekcia kruznic')
+    param2 = cv2.getTrackbarPos('Param2', 'Detekcia kruznic')
+    minRadius = cv2.getTrackbarPos('MinRadius', 'Detekcia kruznic')
+    maxRadius = cv2.getTrackbarPos('MaxRadius', 'Detekcia kruznic')
+    canny1 = cv2.getTrackbarPos('Canny1', 'Detekcia kruznic')
+    canny2 = cv2.getTrackbarPos('Canny2', 'Detekcia kruznic')
     
     # Cannyho detektor hrán
     edges = cv2.Canny(gray, canny1, canny2)
