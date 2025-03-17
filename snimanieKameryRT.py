@@ -32,7 +32,7 @@ cv2.namedWindow("Detekcia kružníc", cv2.WINDOW_NORMAL)
 cv2.createTrackbar('Param1', 'Detekcia kružníc', 115, 200, lambda x: None)
 cv2.createTrackbar('Param2', 'Detekcia kružníc', 58, 100, lambda x: None)
 cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 0, 100, lambda x: None)
-cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 300, 300, lambda x: None)
+cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 500, 500, lambda x: None)
 cv2.createTrackbar('Canny1', 'Detekcia kružníc', 0, 255, lambda x: None)
 cv2.createTrackbar('Canny2', 'Detekcia kružníc', 50, 255, lambda x: None)
 

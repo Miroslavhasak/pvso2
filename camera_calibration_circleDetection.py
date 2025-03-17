@@ -119,12 +119,12 @@ if cameraXimea:
 cv.namedWindow("Detekcia kružníc", cv.WINDOW_NORMAL)
 
 # Trackbary na úpravu parametrov
-cv.createTrackbar('Param1', 'Detekcia kružníc', 30, 200, lambda x: None)
-cv.createTrackbar('Param2', 'Detekcia kružníc', 15, 100, lambda x: None)
-cv.createTrackbar('MinRadius', 'Detekcia kružníc', 10, 100, lambda x: None)
-cv.createTrackbar('MaxRadius', 'Detekcia kružníc', 150, 300, lambda x: None)
-cv.createTrackbar('Canny1', 'Detekcia kružníc', 50, 255, lambda x: None)
-cv.createTrackbar('Canny2', 'Detekcia kružníc', 150, 255, lambda x: None)
+cv.createTrackbar('Param1', 'Detekcia kružníc', 115, 200, lambda x: None)
+cv.createTrackbar('Param2', 'Detekcia kružníc', 58, 100, lambda x: None)
+cv.createTrackbar('MinRadius', 'Detekcia kružníc', 0, 100, lambda x: None)
+cv.createTrackbar('MaxRadius', 'Detekcia kružníc', 500, 500, lambda x: None)
+cv.createTrackbar('Canny1', 'Detekcia kružníc', 0, 255, lambda x: None)
+cv.createTrackbar('Canny2', 'Detekcia kružníc', 50, 255, lambda x: None)
 
 images = glob.glob('CircleDetectionTestingPictures/*.jpg')
 
