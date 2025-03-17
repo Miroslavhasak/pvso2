@@ -15,12 +15,12 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 900)
 cv2.namedWindow("Detekcia kružníc", cv2.WINDOW_NORMAL)
 
 # Trackbary na úpravu parametrov
-cv2.createTrackbar('Param1', 'Detekcia kružníc', 30, 200, lambda x: None)
-cv2.createTrackbar('Param2', 'Detekcia kružníc', 15, 100, lambda x: None)
-cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 10, 100, lambda x: None)
-cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 150, 300, lambda x: None)
-cv2.createTrackbar('Canny1', 'Detekcia kružníc', 50, 255, lambda x: None)
-cv2.createTrackbar('Canny2', 'Detekcia kružníc', 150, 255, lambda x: None)
+cv2.createTrackbar('Param1', 'Detekcia kružníc', 115, 200, lambda x: None)
+cv2.createTrackbar('Param2', 'Detekcia kružníc', 58, 100, lambda x: None)
+cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 0, 100, lambda x: None)
+cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 300, 300, lambda x: None)
+cv2.createTrackbar('Canny1', 'Detekcia kružníc', 0, 255, lambda x: None)
+cv2.createTrackbar('Canny2', 'Detekcia kružníc', 50, 255, lambda x: None)
 
 while True:
     ret, frame = cap.read()
@@ -42,12 +42,26 @@ while True:
     
     # Cannyho detektor hrán
     edges = cv2.Canny(gray, canny1, canny2)
+    # canny 1 = 0
+    # canny 2 = 25
     
     # Detekcia kružníc pomocou Houghovej transformácie
+    """
     circles = cv2.HoughCircles(
         gray, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30,
         param1=param1, param2=param2, minRadius=minRadius, maxRadius=maxRadius
     )
+    """
+    # min radius = 0
+    # max radius = 200
+    
+    # param 1 = 148
+    # param 2 = 58
+    circles = cv2.HoughCircles(
+        gray, cv2.HOUGH_GRADIENT, dp=1, minDist=30,
+        param1=param1, param2=param2, minRadius=minRadius, maxRadius=maxRadius
+    )  # dp = koeficient rozlisenia  minDist = min. vzdialenost medzi stredmi kruznic  param1 = prahova hodnora pre detekciu hran  
+    # param2 = minimalny pocet hlasov na potvrdenie kruznice
 
     # Ak sa našli kružnice, vykresli ich
     if circles is not None:
@@ -61,7 +75,7 @@ while True:
     
     # Zobrazenie výsledku
     combined = np.hstack((cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR), frame))  # Spojenie hrán a pôvodného obrazu
-    cv2.imshow("Detekcia kružníc", combined)
+    cv2.imshow("Detekcia kruznic", combined)
     
     # Čakanie na kláves
     key = cv2.waitKey(1) & 0xFF

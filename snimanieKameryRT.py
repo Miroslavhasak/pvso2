@@ -26,11 +26,15 @@ print('Začiatok snímania...')
 # Inicializácia OpenCV okna
 cv2.namedWindow("Detekcia kružníc", cv2.WINDOW_NORMAL)
 
+# cv2.createTrackbar(name, window_name, value, max_value, callback_function)
+
 # Trackbary na úpravu parametrov
-cv2.createTrackbar('Param1', 'Detekcia kružníc', 30, 200, lambda x: None)
-cv2.createTrackbar('Param2', 'Detekcia kružníc', 15, 100, lambda x: None)
-cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 10, 100, lambda x: None)
-cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 150, 300, lambda x: None)
+cv2.createTrackbar('Param1', 'Detekcia kružníc', 115, 200, lambda x: None)
+cv2.createTrackbar('Param2', 'Detekcia kružníc', 58, 100, lambda x: None)
+cv2.createTrackbar('MinRadius', 'Detekcia kružníc', 0, 100, lambda x: None)
+cv2.createTrackbar('MaxRadius', 'Detekcia kružníc', 300, 300, lambda x: None)
+cv2.createTrackbar('Canny1', 'Detekcia kružníc', 0, 255, lambda x: None)
+cv2.createTrackbar('Canny2', 'Detekcia kružníc', 50, 255, lambda x: None)
 
 while True:
     key = cv2.waitKey(1) & 0xFF  # Čakanie na kláves
@@ -45,17 +49,23 @@ while True:
     # Prevod do odtieňov sivej
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (11, 11), 2)  # Silnejšie rozmazanie
-    edges = cv2.Canny(gray, 50, 150)  # Cannyho detektor hrán
 
     # Načítanie hodnôt z trackbarov
     param1 = cv2.getTrackbarPos('Param1', 'Detekcia kružníc')
     param2 = cv2.getTrackbarPos('Param2', 'Detekcia kružníc')
     minRadius = cv2.getTrackbarPos('MinRadius', 'Detekcia kružníc')
     maxRadius = cv2.getTrackbarPos('MaxRadius', 'Detekcia kružníc')
+    canny1 = cv2.getTrackbarPos('Canny1', 'Detekcia kružníc')
+    canny2 = cv2.getTrackbarPos('Canny2', 'Detekcia kružníc')
+    
 
+    # Cannyho detektor hrán
+    edges = cv2.Canny(gray, canny1, canny2)  # 50 150
+    # canny 1 = 0
+    # canny 2 = 25
     # Detekcia kružníc pomocou Houghovej transformácie
     circles = cv2.HoughCircles(
-        gray, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30,
+        gray, cv2.HOUGH_GRADIENT, dp=1, minDist=30,
         param1=param1, param2=param2, minRadius=minRadius, maxRadius=maxRadius
     )
 
